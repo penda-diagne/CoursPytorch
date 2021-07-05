@@ -18,7 +18,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 labels = pd.read_csv(path_data+'train_labels.csv')
+import torch
+from torch.utils.data import Dataset
 
+import torchvision.transforms as transforms
+
+torch.manual_seed(0)
 
 class HistoDataset(Dataset):
   def __init__(self,path_data,transform,data_type ="train"):
