@@ -1,7 +1,8 @@
 from argparse import ArgumentParser
 import HistoDataModule
 import HistoModel
-
+import numpy as np
+import os
 import sys
 path_data_train = '/content/train'
 path_data_test = '/content/test'
