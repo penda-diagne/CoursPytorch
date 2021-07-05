@@ -10,7 +10,7 @@ class HistoDataModule(pl.LightningDataModule):
         
     def setup(self, path=None):
         histo_full = data.HistoDataset(self.root_dir, self.transform)
-        len_data=len(thedata)
+        len_data=len(data.thedata)
         len_train=int(0.8*len_data)
         len_val=len_data-len_train
 
