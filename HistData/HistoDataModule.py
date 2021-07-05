@@ -1,5 +1,6 @@
 import pytorch_lightning as pl
 import data
+from torch.utils.data import random_split
 class HistoDataModule(pl.LightningDataModule):
     """ Cassava DataModule for Lightning """
     def __init__(self, root_dir, transform=None, batch_size=32):
