@@ -1,3 +1,4 @@
+import pytorch_lightning as pl
 class HistoDataModule(pl.LightningDataModule):
     """ Cassava DataModule for Lightning """
     def __init__(self, root_dir, transform=None, batch_size=32):
