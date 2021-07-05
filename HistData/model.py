@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 import HistoDataModule
 import HistoModel
+import data
 initial_parameters={'input_shape':(3,96,96),"initial_filters":8,"num_fc1":100,"num_classes":2,"dropout_rate":0.25}initial_parameters={'input_shape':(3,96,96),"initial_filters":8,"num_fc1":100,"num_classes":2,"dropout_rate":0.25}
 histo_data = HistoDataModule.HistoDataModule(path_data, transform, batch_size=64)
 histo_data.setup()
