@@ -58,5 +58,5 @@ transform = transforms.Compose([
 ])
 
 thedata = HistoDataset(path_data,transform,"train")
-histo_data = HistoDataModule.HistoDataModule(path_data, transform, batch_size=64)
+histo_data = HistoDataModule.DataModule(path_data, transform, batch_size=64)
 histo_data.setup()
