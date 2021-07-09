@@ -16,7 +16,7 @@ sys.path.append(path2weights)
 
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import HistoDataModule
 labels = pd.read_csv(path_data+'train_labels.csv')
 
 
@@ -58,3 +58,5 @@ transform = transforms.Compose([
 ])
 
 thedata = HistoDataset(path_data,transform,"train")
+histo_data = HistoDataModule.HistoDataModule(path_data, transform, batch_size=64)
+histo_data.setup()
