@@ -1,5 +1,6 @@
 import sys
 import torch
+from PIL import Image, ImageDraw
 from torch.utils.data import Dataset
 import os
 import torchvision.transforms as transforms
