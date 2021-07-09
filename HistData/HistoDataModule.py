@@ -3,7 +3,7 @@ import data
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 from torch.utils.data import random_split
-class HistoDataModule(pl.LightningDataModule):
+class DataModule(pl.LightningDataModule):
     """ Cassava DataModule for Lightning """
     def __init__(self, root_dir, transform=None, batch_size=32):
         super().__init__()
