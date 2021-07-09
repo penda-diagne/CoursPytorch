@@ -1,4 +1,5 @@
-import pytorch_lightning as pl
+import pytorch_lightning as plistoDataModule
+import numpy as np
 def findConv2dOutShape(H_in,W_in,conv,pool=2):
   # get conv arguments
   kernel_size=conv.kernel_size
