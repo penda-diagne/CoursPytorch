@@ -42,38 +42,20 @@ class model_lit(pl.LightningModule):
         self.learning_rate=learning_rate
     def configure_optimizers(self):
         return torch.optim.Adam(self.parameters(),lr=self.learning_rate)
-    
+    def forward(self, x):
+        x = self.enc.extract_features(x)
+        # x = self.head(x)      
+        return x
+      
     def training_step(self, batch, batch_idx):
         x, y = batch
-        x = F.relu(self.conv1(x))
-        x = F.max_pool2d(x, 2, 2)
-        x = F.relu(self.conv2(x))
-        x = F.max_pool2d(x, 2, 2)
-        x = F.relu(self.conv3(x))
-        x = F.max_pool2d(x, 2, 2)
-        x = F.relu(self.conv4(x))
-        x = F.max_pool2d(x, 2, 2)
-        x = x.view(-1, self.num_flatten)
-        x = F.relu(self.fc1(x))
-        x=F.dropout(x, self.dropout_rate)
-        x = self.fc2(x)
+        x=self.forward(x)
         loss = F.cross_entropy(x, y)
         return loss
 
     def validation_step(self, batch, batch_idx):
         x, y = batch
-        x = F.relu(self.conv1(x))
-        x = F.max_pool2d(x, 2, 2)
-        x = F.relu(self.conv2(x))
-        x = F.max_pool2d(x, 2, 2)
-        x = F.relu(self.conv3(x))
-        x = F.max_pool2d(x, 2, 2)
-        x = F.relu(self.conv4(x))
-        x = F.max_pool2d(x, 2, 2)
-        x = x.view(-1, self.num_flatten)
-        x = F.relu(self.fc1(x))
-        x=F.dropout(x, self.dropout_rate)
-        x = self.fc2(x)
+        x=self.forward(x)
         loss = F.cross_entropy(x, y)
         metrics = {'val_loss': loss}
         self.log_dict(metrics)
