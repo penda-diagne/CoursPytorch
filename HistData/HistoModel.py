@@ -1,5 +1,5 @@
 import pytorch_lightning as pl
-import numpy as np
+import numpy
 def findConv2dOutShape(H_in,W_in,conv,pool=2):
   # get conv arguments
   kernel_size=conv.kernel_size
@@ -7,8 +7,8 @@ def findConv2dOutShape(H_in,W_in,conv,pool=2):
   padding=conv.padding
   dilation=conv.dilation
 
-  H_out=np.floor((H_in+2*padding[0]-dilation[0]*(kernel_size[0]-1)-1)/stride[0]+1)
-  W_out=np.floor((W_in+2*padding[1]-dilation[1]*(kernel_size[1]-1)-1)/stride[1]+1)
+  H_out=numpy.floor((H_in+2*padding[0]-dilation[0]*(kernel_size[0]-1)-1)/stride[0]+1)
+  W_out=numpy.floor((W_in+2*padding[1]-dilation[1]*(kernel_size[1]-1)-1)/stride[1]+1)
   if pool:
     H_out/=pool
     W_out/=pool
