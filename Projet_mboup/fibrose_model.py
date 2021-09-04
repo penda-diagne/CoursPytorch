@@ -8,6 +8,11 @@ from torch.utils.data import random_split
 import torchvision.models as models
 from torch.nn import functional as F
 from torch import nn
+import pandas as pd
+import matplotlib.pyplot as plt
+from PIL import Image, ImageDraw
+import numpy as np
+import os
 class LitModel(pl.LightningModule):
     def __init__(self, input_shape, num_classes, learning_rate=3e-4):
         super().__init__()
