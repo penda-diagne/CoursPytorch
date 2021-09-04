@@ -8,6 +8,11 @@ from torch.utils.data import random_split
 import torchvision.models as models
 from torch.nn import functional as F
 from torch import nn
+import pandas as pd
+import matplotlib.pyplot as plt
+from PIL import Image, ImageDraw
+import numpy as np
+import os
 class Caltech101DataModule(pl.LightningDataModule):
     def __init__(self, batch_size,dataset):
         super().__init__()
