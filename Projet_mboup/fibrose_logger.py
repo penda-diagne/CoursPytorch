@@ -1,3 +1,4 @@
+from pytorch_lightning.callbacks import Callback
 class ImagePredictionLogger(Callback):
     def __init__(self, val_samples, num_samples=8):
         super().__init__()
