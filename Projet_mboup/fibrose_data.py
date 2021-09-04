@@ -4,11 +4,13 @@ from PIL import Image, ImageDraw
 import numpy as np
 import os
 import sys
-sys.path.append(path_data_f0)
-sys.path.append(path_data_f4)
 path_data_f0 = '/content/IMAGES_ECHO_LABELLISEES/F0/'
 path_data_f4 = '/content/IMAGES_ECHO_LABELLISEES/F4/'
 path2weights = '/content/drive/MyDrive/models'
+
+sys.path.append(path_data_f0)
+sys.path.append(path_data_f4)
+
 path2dataf0 = os.path.join(path_data_f0)
 path2dataf4 = os.path.join(path_data_f4) 
 
