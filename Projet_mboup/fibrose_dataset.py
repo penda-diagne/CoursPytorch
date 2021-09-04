@@ -1,4 +1,5 @@
 import torch
+from fibrose_data import data
 from torch.utils.data import Dataset
 import pytorch_lightning as pl
 import torchvision.transforms as transforms
