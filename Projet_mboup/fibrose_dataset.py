@@ -31,7 +31,7 @@ class mboupDataset(Dataset):
     Ouvre  l'image numero i, applique le transform et retourne avec le label
     '''
     img = Image.open(data[i])
-    img = self.transform(img)
     img = img.filter(ImageFilter.SMOOTH_MORE)
+    img = self.transform(img)
     return img,self.labels[i]
     
