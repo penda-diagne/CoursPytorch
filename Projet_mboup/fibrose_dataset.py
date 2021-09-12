@@ -1,4 +1,5 @@
 import torch
+from PIL import ImageFilter
 from fibrose_data import data
 from torch.utils.data import Dataset
 import pytorch_lightning as pl
@@ -31,5 +32,6 @@ class mboupDataset(Dataset):
     '''
     img = Image.open(data[i])
     img = self.transform(img)
+    img = img.filter(ImageFilter.SMOOTH_MORE)
     return img,self.labels[i]
     
