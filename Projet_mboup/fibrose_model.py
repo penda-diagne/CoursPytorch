@@ -27,7 +27,7 @@ class LitModel(pl.LightningModule):
         self.feature_extractor.eval()
         layer4 = self.feature_extractor.layer4
         self.feature_extractor.layer4 = nn.Sequential(
-                                    nn.Dropout(0.5),
+                                    nn.Dropout(0.3),
                                     layer4
                                     )
         for param in self.feature_extractor.parameters():
