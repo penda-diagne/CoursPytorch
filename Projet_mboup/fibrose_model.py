@@ -14,7 +14,7 @@ from PIL import Image, ImageDraw
 import numpy as np
 import os
 class LitModel(pl.LightningModule):
-    def __init__(self, input_shape, num_classes, learning_rate=6e-4):
+    def __init__(self, input_shape, num_classes, learning_rate=6e-3):
         super().__init__()
         
         # log hyperparameters
