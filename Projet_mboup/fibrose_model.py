@@ -14,7 +14,7 @@ from PIL import Image, ImageDraw
 import numpy as np
 import os
 class LitModel(pl.LightningModule):
-    def __init__(self, input_shape, num_classes, learning_rate=6e-3):
+    def __init__(self, input_shape, num_classes, learning_rate=6e-4):
         super().__init__()
         
         # log hyperparameters
@@ -27,7 +27,7 @@ class LitModel(pl.LightningModule):
         self.feature_extractor.eval()
         layer4 = self.feature_extractor.layer4
         self.feature_extractor.layer4 = nn.Sequential(
-                                    nn.Dropout(0.4),
+                                    nn.Dropout(0.5),
                                     layer4
                                     )
         for param in self.feature_extractor.parameters():
