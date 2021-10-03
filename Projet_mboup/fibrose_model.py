@@ -98,5 +98,5 @@ class LitModel(pl.LightningModule):
         return loss
 
     def configure_optimizers(self):
-        optimizer = torch.optim.SGD(self.parameters(), lr=self.learning_rate,momentum=9)
+        optimizer = torch.optim.SGD(self.parameters(), lr=self.learning_rate)
         return optimizer
