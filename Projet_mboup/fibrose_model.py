@@ -27,7 +27,7 @@ class LitModel(pl.LightningModule):
         self.feature_extractor.eval()
         layer4 = self.feature_extractor.layer4
         self.feature_extractor.layer4 = nn.Sequential(
-                                    nn.Dropout(0.5),
+                                    nn.Dropout(0.6),
                                     layer4
                                     )
         for param in self.feature_extractor.parameters():
@@ -98,5 +98,5 @@ class LitModel(pl.LightningModule):
         return loss
 
     def configure_optimizers(self):
-        optimizer = torch.optim.SGD(self.parameters(), lr=self.learning_rate,momentum=7)
+        optimizer = torch.optim.SGD(self.parameters(), lr=self.learning_rate,momentum=9)
         return optimizer
