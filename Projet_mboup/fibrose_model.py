@@ -63,7 +63,7 @@ class LitModel(pl.LightningModule):
     def training_step(self, batch, batch_idx):
         x, y = batch
         logits = self(x)
-        loss = F.binary_cross_entropy(logits, y)
+        loss = F.nll_loss(logits, y)
         
         # training metrics
         preds = torch.argmax(logits, dim=1)
@@ -75,7 +75,7 @@ class LitModel(pl.LightningModule):
     def validation_step(self, batch, batch_idx):
         x, y = batch
         logits = self(x)
-        loss = F.binary_cross_entropy(logits, y)
+        loss = F.nll_loss(logits, y)
 
         # validation metrics
         preds = torch.argmax(logits, dim=1)
@@ -88,7 +88,7 @@ class LitModel(pl.LightningModule):
     def test_step(self, batch, batch_idx):
         x, y = batch
         logits = self(x)
-        loss = F.binary_cross_entropy(logits, y)
+        loss = F.nll_loss(logits, y)
         
         # validation metrics
         preds = torch.argmax(logits, dim=1)
