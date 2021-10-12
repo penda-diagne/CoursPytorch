@@ -23,8 +23,17 @@ full_files4 = [os.path.join(path2dataf4,f) for f in full_filenames4]
 data=full_files0+full_files4
 datadf=pd.DataFrame(columns=["id","path","label","niveau fibrose"])
 for i in full_files0:
-     i=i.replace(path_data_f0,"")
-     datadf=datadf.append({"id":i,"path":path_data_f0,"label":0,"niveau fibrose":"F0"},ignore_index=True)
+     if i.contains("f0"):
+          i=i.replace(path_data_f0,"")
+          datadf=datadf.append({"id":i,"path":path_data_f0,"label":0,"niveau fibrose":"F0-f0"},ignore_index=True)
+     elif i.contains("f1"):
+          i=i.replace(path_data_f0,"")
+          datadf=datadf.append({"id":i,"path":path_data_f0,"label":0,"niveau fibrose":"F0-f1"},ignore_index=True)
 for i in full_files4:
-     i=i.replace(path_data_f4,"")
-     datadf=datadf.append({"id":i,"path":path_data_f4,"label":1,"niveau fibrose":"F4"},ignore_index=True)
+     if i.contains("f2"):
+          i=i.replace(path_data_f4,"")
+          datadf=datadf.append({"id":i,"path":path_data_f4,"label":1,"niveau fibrose":"F4-f2"},ignore_index=True)
+     elif i.contains("f4"):
+          i=i.replace(path_data_f4,"")
+          datadf=datadf.append({"id":i,"path":path_data_f4,"label":1,"niveau fibrose":"F4-f4"},ignore_index=True)
+     
