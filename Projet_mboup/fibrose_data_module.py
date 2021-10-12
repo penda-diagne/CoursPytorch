@@ -34,7 +34,7 @@ class Caltech101DataModule(pl.LightningDataModule):
         
         self.num_classes = 2
 
-    def setup(self):
+    def setup(self,stage=None):
         len_data=len(self.dataset)
         len_train=int(0.6*len_data)
         len_val=int(0.2*len_data)
@@ -43,7 +43,6 @@ class Caltech101DataModule(pl.LightningDataModule):
         self.train.dataset.transform = self.augmentation
         self.val.dataset.transform = self.transform
         self.test.dataset.transform = self.transform
-        return self.train.dataset.transform, self.val.dataset.transform, self.test.dataset.transform
         
     def train_dataloader(self):
         return DataLoader(self.train, batch_size=self.batch_size, shuffle=True)
