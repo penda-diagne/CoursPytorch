@@ -43,7 +43,7 @@ class Caltech101DataModule(pl.LightningDataModule):
         self.train.dataset.transform = self.augmentation
         self.val.dataset.transform = self.transform
         self.test.dataset.transform = self.transform
-        return self.train.dataset.transform, self.val.dataset.transform, self.test.dataset.transform = self.transform
+        return self.train.dataset.transform, self.val.dataset.transform, self.test.dataset.transform
         
     def train_dataloader(self):
         return DataLoader(self.train, batch_size=self.batch_size, shuffle=True)
