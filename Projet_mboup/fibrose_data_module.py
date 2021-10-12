@@ -34,7 +34,7 @@ class Caltech101DataModule(pl.LightningDataModule):
         
         self.num_classes = 2
 
-    def setup(self, stage=None):
+    def setup(self):
         len_data=len(self.dataset)
         len_train=int(0.6*len_data)
         len_val=int(0.2*len_data)
