@@ -35,5 +35,6 @@ class mboupDataset(Dataset):
     img_cr = img_r.crop((0, 100, 329, 375))
     img_f = img_cr.filter(ImageFilter.SMOOTH)
     img_t = self.transform(img_f)
+    plt.imshow(np.array(img_f))
     return img_t,self.labels[i]
     
