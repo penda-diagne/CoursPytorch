@@ -4,7 +4,7 @@ from fibrose_data import data
 from torch.utils.data import Dataset
 import pytorch_lightning as pl
 import torchvision.transforms as transforms
-from pytorch_lightning.metrics.functional import accuracy
+from pytorch_lightning.metrics import accuracy
 from torch.utils.data import DataLoader
 from torch.utils.data import random_split
 import torchvision.models as models
