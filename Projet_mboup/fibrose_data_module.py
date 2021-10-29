@@ -23,7 +23,6 @@ class Caltech101DataModule(pl.LightningDataModule):
               transforms.Resize(size=(329, 375)),
               transforms.RandomRotation(degrees = 45),
               transforms.RandomHorizontalFlip(p = 0.005),
-              transforms.Grayscale(1),
               transforms.ToTensor(),
               transforms.Normalize([0.485, 0.456, 0.406],[0.229, 0.224, 0.225])
         ])
