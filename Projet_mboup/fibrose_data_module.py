@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import Dataset
 import pytorch_lightning as pl
 import torchvision.transforms as transforms
-import torchmetrics.functionnal.accuracy as accuracy
+import torchmetrics.functional.accuracy as accuracy
 from torch.utils.data import DataLoader
 from torch.utils.data import random_split
 import torchvision.models as models
