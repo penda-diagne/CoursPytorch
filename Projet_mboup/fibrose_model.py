@@ -14,7 +14,7 @@ from PIL import Image, ImageDraw
 import numpy as np
 import os
 class LitModel(pl.LightningModule):
-    def __init__(self, input_shape, num_classes, learning_rate=3e-4):
+    def __init__(self, input_shape, num_classes, learning_rate=5e-4):
         super().__init__()
         accuracy = torchmetrics.Accuracy()
         # log hyperparameters
@@ -26,10 +26,6 @@ class LitModel(pl.LightningModule):
         self.feature_extractor = models.resnet50(pretrained=True)
         self.feature_extractor.eval()
         layer4 = self.feature_extractor.layer4
-        self.feature_extractor.layer4 = nn.Sequential(
-                                    nn.Dropout(0.3),
-                                    layer4
-                                    )
         for param in self.feature_extractor.parameters():
             param.requires_grad = False
         
@@ -98,5 +94,5 @@ class LitModel(pl.LightningModule):
         return loss
 
     def configure_optimizers(self):
-        optimizer = torch.optim.Adam(self.parameters(), lr=self.learning_rate,weight_decay=3e-2)
+        optimizer = torch.optim.Adam(self.parameters(), lr=self.learning_rate)
         return optimizer
