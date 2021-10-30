@@ -63,7 +63,7 @@ class LitModel(pl.LightningModule):
     def forward(self, x):
        x = self._forward_features(x)
        x = x.view(x.size(0), -1)
-       x = F.logsigmoid(self.classifier(x))
+       x = F.log_softmax(self.classifier(x))
        
        return x
 
@@ -71,7 +71,7 @@ class LitModel(pl.LightningModule):
     def training_step(self, batch, batch_idx):
         x, y = batch
         logits = self(x)
-        loss = F.nll_loss(logits, y)
+        loss = F.cross_entropy(logits, y)
         
         # training metrics
         preds = torch.argmax(logits, dim=1)
@@ -83,7 +83,7 @@ class LitModel(pl.LightningModule):
     def validation_step(self, batch, batch_idx):
         x, y = batch
         logits = self(x)
-        loss = F.nll_loss(logits, y)
+        loss = F.cross_entropy(logits, y)
 
         # validation metrics
         preds = torch.argmax(logits, dim=1)
@@ -96,7 +96,7 @@ class LitModel(pl.LightningModule):
     def test_step(self, batch, batch_idx):
         x, y = batch
         logits = self(x)
-        loss = F.nll_loss(logits, y)
+        loss = F.cross_entropy(logits, y)
         
         # validation metrics
         preds = torch.argmax(logits, dim=1)
