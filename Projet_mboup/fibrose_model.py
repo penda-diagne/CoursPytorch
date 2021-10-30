@@ -14,25 +14,37 @@ from PIL import Image, ImageDraw
 import numpy as np
 import os
 class LitModel(pl.LightningModule):
-    def __init__(self, input_shape, num_classes, learning_rate=5e-4):
+    def __init__(self, input_shape, num_classes,model_name, learning_rate=5e-4):
         super().__init__()
-        accuracy = torchmetrics.Accuracy()
+        self.accuracy = torchmetrics.Accuracy()
         # log hyperparameters
         self.save_hyperparameters()
         self.learning_rate = learning_rate
         self.dim = input_shape
         self.num_classes = num_classes
+
+        if model_name == "resnet":
+            self.feature_extractor = models.resnet50(pretrained=True)
+            self.feature_extractor.eval()
+            layer4 = self.feature_extractor.layer4
+            # self.feature_extractor.layer4 = nn.Sequential(
+            #                         nn.Dropout(0.1),
+            #                         layer4
+            #                         )
+            for param in self.feature_extractor.parameters():
+                param.requires_grad = False
         
-        self.feature_extractor = models.resnet50(pretrained=True)
-        self.feature_extractor.eval()
-        layer4 = self.feature_extractor.layer4
-        for param in self.feature_extractor.parameters():
-            param.requires_grad = False
-        
+
+        elif model_name == "vgg":
+            self.feature_extractor = models.vgg16_bn(pretrained=True)
+            self.feature_extractor.eval()
+            for param in self.feature_extractor.parameters():
+                param.requires_grad = False
+
+
         n_sizes = self._get_conv_output(input_shape)
 
         self.classifier = nn.Linear(n_sizes, num_classes)
-
     # returns the size of the output tensor going into Linear layer from the conv block.
     def _get_conv_output(self, shape):
         batch_size = 1
@@ -63,7 +75,7 @@ class LitModel(pl.LightningModule):
         
         # training metrics
         preds = torch.argmax(logits, dim=1)
-        acc = accuracy(preds, y)
+        acc = self.accuracy(preds, y)
        
         return loss
 
@@ -75,7 +87,7 @@ class LitModel(pl.LightningModule):
 
         # validation metrics
         preds = torch.argmax(logits, dim=1)
-        acc = accuracy(preds, y)
+        acc = self.accuracy(preds, y)
         self.log('val_loss', loss, prog_bar=True)
         self.log('val_acc', acc, prog_bar=True)
         return loss
@@ -88,7 +100,7 @@ class LitModel(pl.LightningModule):
         
         # validation metrics
         preds = torch.argmax(logits, dim=1)
-        acc = accuracy(preds, y)
+        acc = self.accuracy(preds, y)
         self.log('test_loss', loss, prog_bar=True)
         self.log('test_acc', acc, prog_bar=True)
         return loss
