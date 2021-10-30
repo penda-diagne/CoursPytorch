@@ -27,10 +27,6 @@ class LitModel(pl.LightningModule):
             self.feature_extractor = models.resnet50(pretrained=True)
             self.feature_extractor.eval()
             layer4 = self.feature_extractor.layer4
-            # self.feature_extractor.layer4 = nn.Sequential(
-            #                         nn.Dropout(0.1),
-            #                         layer4
-            #                         )
             for param in self.feature_extractor.parameters():
                 param.requires_grad = False
         
@@ -71,7 +67,7 @@ class LitModel(pl.LightningModule):
     def training_step(self, batch, batch_idx):
         x, y = batch
         logits = self(x)
-        loss = F.cross_entropy(logits, y)
+        loss = F.nll_loss(logits, y)
         
         # training metrics
         preds = torch.argmax(logits, dim=1)
@@ -83,7 +79,7 @@ class LitModel(pl.LightningModule):
     def validation_step(self, batch, batch_idx):
         x, y = batch
         logits = self(x)
-        loss = F.cross_entropy(logits, y)
+        loss = F.nll_loss(logits, y)
 
         # validation metrics
         preds = torch.argmax(logits, dim=1)
@@ -96,7 +92,7 @@ class LitModel(pl.LightningModule):
     def test_step(self, batch, batch_idx):
         x, y = batch
         logits = self(x)
-        loss = F.cross_entropy(logits, y)
+        loss = F.nll_loss(logits, y)
         
         # validation metrics
         preds = torch.argmax(logits, dim=1)
