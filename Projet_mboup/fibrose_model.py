@@ -59,7 +59,7 @@ class LitModel(pl.LightningModule):
     def forward(self, x):
        x = self._forward_features(x)
        x = x.view(x.size(0), -1)
-       x = F.logsigmoid(self.classifier(x))
+       x = F.log_softmax(self.classifier(x))
        
        return x
 
