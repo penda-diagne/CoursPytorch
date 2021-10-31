@@ -26,7 +26,6 @@ class Caltech101DataModule(pl.LightningDataModule):
               transforms.RandomVerticalFlip(p = 0.4),
               transforms.RandomCrop((224,224)),
               transforms.ColorJitter(brightness=0.1, contrast=0.2, saturation=0, hue=0),
-              transforms.ConvertImageDtype(torch.float),
               transforms.ToTensor(),
               transforms.Normalize([0.485, 0.456, 0.406],[0.229, 0.224, 0.225])
         ])
