@@ -14,7 +14,7 @@ from PIL import Image, ImageDraw
 import numpy as np
 import os
 class LitModel(pl.LightningModule):
-    def __init__(self, input_shape, num_classes,model_name, learning_rate=5e-4):
+    def __init__(self, input_shape, num_classes,model_name, learning_rate=3e-4):
         super().__init__()
         self.accuracy = torchmetrics.Accuracy()
         # log hyperparameters
